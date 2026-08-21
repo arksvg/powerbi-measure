@@ -522,6 +522,16 @@ CALCULATE(
         MONTH
     )
 )</p>
+
+    <p>ScorePct Same Month Last Year =
+CALCULATE(
+    [ScorePct],
+    DATEADD(
+        'powerbi_overall_vm_score'[ReportMonth],
+        -1,
+        YEAR
+    )
+)</p>
     <!-- =========================
          FOOTER
     ========================== -->
