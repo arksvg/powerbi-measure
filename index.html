@@ -514,32 +514,56 @@ RETURN
     </section>
 
 
-    <p>Month Number =
-MONTH('powerbi_domain_externally_facing'[ReportMonth])</p>
+    <!-- =====================================================
+         5. SCORE GRADE BADGE
+    ====================================================== -->
 
-  </hr>
+    <section class="card">
 
-    <p>Score Grade Badge =
+      <div class="card-head">
+
+        <div>
+
+          <div class="title">
+            5. Score Grade Badge
+          </div>
+
+          <div class="subtitle">
+            Generates an SVG hexagon badge with Grade, Score Percentage and dynamic color.
+          </div>
+
+        </div>
+
+        <button onclick="copyCode('code5', this)">
+          Copy
+        </button>
+
+      </div>
+
+
+      <div class="code-wrap">
+
+        <pre id="code5">Score Grade Badge =
 VAR _Score =
     AVERAGE('YourTable'[ScorePct])
 
 VAR _Grade =
     SWITCH(
         TRUE(),
-        _Score >= 0.90, "A",
-        _Score >= 0.80, "B",
-        _Score >= 0.70, "C",
-        _Score >= 0.60, "D",
+        _Score &gt;= 0.90, "A",
+        _Score &gt;= 0.80, "B",
+        _Score &gt;= 0.70, "C",
+        _Score &gt;= 0.60, "D",
         "F"
     )
 
 VAR _Color =
     SWITCH(
         TRUE(),
-        _Score >= 0.90, "#22C55E",
-        _Score >= 0.80, "#FBBF24",
-        _Score >= 0.70, "#F97316",
-        _Score >= 0.60, "#EF4444",
+        _Score &gt;= 0.90, "#22C55E",
+        _Score &gt;= 0.80, "#FBBF24",
+        _Score &gt;= 0.70, "#F97316",
+        _Score &gt;= 0.60, "#EF4444",
         "#DC2626"
     )
 
@@ -548,43 +572,49 @@ VAR _Percentage =
 
 RETURN
 "
-<svg width='60' height='65' viewBox='0 0 60 65'
-     xmlns='http://www.w3.org/2000/svg'>
+&lt;svg width='60' height='65' viewBox='0 0 60 65'
+     xmlns='http://www.w3.org/2000/svg'&gt;
 
-    <!-- Hexagon -->
-    <polygon
+    &lt;!-- Hexagon --&gt;
+    &lt;polygon
         points='30,2 52,15 52,42 30,55 8,42 8,15'
         fill='none'
-        stroke='" & _Color & "'
+        stroke='" &amp; _Color &amp; "'
         stroke-width='2.2'
-    />
+    /&gt;
 
-    <!-- Grade -->
-    <text
+    &lt;!-- Grade --&gt;
+    &lt;text
         x='30'
         y='27'
         text-anchor='middle'
         font-family='Arial'
         font-size='19'
         font-weight='600'
-        fill='" & _Color & "'>
-        " & _Grade & "
-    </text>
+        fill='" &amp; _Color &amp; "'&gt;
+        " &amp; _Grade &amp; "
+    &lt;/text&gt;
 
-    <!-- Percentage -->
-    <text
+    &lt;!-- Percentage --&gt;
+    &lt;text
         x='30'
         y='42'
         text-anchor='middle'
         font-family='Arial'
         font-size='9'
         font-weight='600'
-        fill='" & _Color & "'>
-        " & _Percentage & "
-    </text>
+        fill='" &amp; _Color &amp; "'&gt;
+        " &amp; _Percentage &amp; "
+    &lt;/text&gt;
 
-</svg>
-"</p>
+&lt;/svg&gt;
+"</pre>
+
+      </div>
+
+    </section>
+
+
     <!-- =========================
          FOOTER
     ========================== -->
@@ -631,8 +661,6 @@ RETURN
 
         })
         .catch(() => {
-
-          /* Fallback for browsers where clipboard API is unavailable */
 
           const textarea = document.createElement("textarea");
 
