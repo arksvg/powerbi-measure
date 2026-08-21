@@ -222,7 +222,7 @@
       <h1>Power BI KPI Measures</h1>
 
       <p>
-        Sales &amp; ScorePct comparison measures — Last Year, Last Month
+        Score &amp; KPI comparison measures — Last Year, Last Month
         &amp; Conditional Formatting
       </p>
 
@@ -249,7 +249,7 @@
 
 
     <!-- =====================================================
-         1. KPI CARD - LAST YEAR
+         1. KPI CARD COLOR - LAST MONTH
     ====================================================== -->
 
     <section class="card">
@@ -259,11 +259,11 @@
         <div>
 
           <div class="title">
-            1. KPI Card — vs Last Year
+            1. KPI Card Color — Last Month
           </div>
 
           <div class="subtitle">
-            Calculates Sales percentage change compared with the previous year.
+            Returns Green, Red or Grey for conditional formatting.
           </div>
 
         </div>
@@ -277,7 +277,7 @@
 
       <div class="code-wrap">
 
-        <pre id="code1">KPI Card =
+        <pre id="code1">KPI Card Color Month =
 
 VAR _CM =
     [Sales]
@@ -288,7 +288,7 @@ VAR _PM =
         DATEADD(
             'Date Table'[Date],
             -1,
-            YEAR
+            MONTH
         )
     )
 
@@ -302,10 +302,10 @@ VAR _format =
     SWITCH(
         TRUE(),
         _perc &gt; 0,
-            UNICHAR(11165) &amp; " " &amp; FORMAT(_perc, "0.0%"),
+            "Green",
         _perc &lt; 0,
-            UNICHAR(11167) &amp; " " &amp; FORMAT(_perc * -1, "0.0%"),
-        FORMAT(_perc, "0.0%")
+            "Red",
+        "Grey"
     )
 
 RETURN
@@ -317,7 +317,7 @@ RETURN
 
 
     <!-- =====================================================
-         2. KPI CARD - LAST MONTH
+         2. KPI CARD COLOR - LAST YEAR
     ====================================================== -->
 
     <section class="card">
@@ -327,11 +327,11 @@ RETURN
         <div>
 
           <div class="title">
-            2. KPI Card — vs Last Month
+            2. KPI Card Color — Last Year
           </div>
 
           <div class="subtitle">
-            Calculates Sales percentage change compared with the previous month.
+            Returns Green, Red or Grey for year-over-year conditional formatting.
           </div>
 
         </div>
@@ -345,143 +345,7 @@ RETURN
 
       <div class="code-wrap">
 
-        <pre id="code2">KPI Card =
-
-VAR _CM =
-    [Sales]
-
-VAR _PM =
-    CALCULATE(
-        [Sales],
-        DATEADD(
-            'Date Table'[Date],
-            -1,
-            MONTH
-        )
-    )
-
-VAR _perc =
-    DIVIDE(
-        _CM - _PM,
-        _PM
-    )
-
-VAR _format =
-    SWITCH(
-        TRUE(),
-        _perc &gt; 0,
-            UNICHAR(11165) &amp; " " &amp; FORMAT(_perc, "0.0%"),
-        _perc &lt; 0,
-            UNICHAR(11167) &amp; " " &amp; FORMAT(_perc * -1, "0.0%"),
-        FORMAT(_perc, "0.0%")
-    )
-
-RETURN
-    _format</pre>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         3. KPI CARD COLOR - LAST MONTH
-    ====================================================== -->
-
-    <section class="card">
-
-      <div class="card-head">
-
-        <div>
-
-          <div class="title">
-            3. KPI Card Color — Last Month
-          </div>
-
-          <div class="subtitle">
-            Returns Green, Red or Grey for conditional formatting.
-          </div>
-
-        </div>
-
-        <button onclick="copyCode('code3', this)">
-          Copy
-        </button>
-
-      </div>
-
-
-      <div class="code-wrap">
-
-        <pre id="code3">KPI Card Color Month =
-
-VAR _CM =
-    [Sales]
-
-VAR _PM =
-    CALCULATE(
-        [Sales],
-        DATEADD(
-            'Date Table'[Date],
-            -1,
-            MONTH
-        )
-    )
-
-VAR _perc =
-    DIVIDE(
-        _CM - _PM,
-        _PM
-    )
-
-VAR _format =
-    SWITCH(
-        TRUE(),
-        _perc &gt; 0,
-            "Green",
-        _perc &lt; 0,
-            "Red",
-        "Grey"
-    )
-
-RETURN
-    _format</pre>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         4. KPI CARD COLOR - LAST YEAR
-    ====================================================== -->
-
-    <section class="card">
-
-      <div class="card-head">
-
-        <div>
-
-          <div class="title">
-            4. KPI Card Color — Last Year
-          </div>
-
-          <div class="subtitle">
-            Returns Green, Red or Grey for year-over-year conditional formatting.
-          </div>
-
-        </div>
-
-        <button onclick="copyCode('code4', this)">
-          Copy
-        </button>
-
-      </div>
-
-
-      <div class="code-wrap">
-
-        <pre id="code4">KPI Card Color Year =
+        <pre id="code2">KPI Card Color Year =
 
 VAR _CM =
     [Sales]
@@ -521,7 +385,7 @@ RETURN
 
 
     <!-- =====================================================
-         5. SCOREPCT - LAST YEAR
+         3. SCOREPCT - LAST YEAR
     ====================================================== -->
 
     <section class="card">
@@ -531,7 +395,7 @@ RETURN
         <div>
 
           <div class="title">
-            5. ScorePct — vs Last Year
+            3. ScorePct — vs Last Year
           </div>
 
           <div class="subtitle">
@@ -540,7 +404,7 @@ RETURN
 
         </div>
 
-        <button onclick="copyCode('code5', this)">
+        <button onclick="copyCode('code3', this)">
           Copy
         </button>
 
@@ -549,7 +413,7 @@ RETURN
 
       <div class="code-wrap">
 
-        <pre id="code5">ScorePct LY =
+        <pre id="code3">ScorePct LY =
 
 VAR _CM =
     AVERAGE('powerbi_overall_vm_score'[ScorePct])
@@ -586,7 +450,7 @@ RETURN
 
 
     <!-- =====================================================
-         6. SCOREPCT - LAST MONTH
+         4. SCOREPCT - LAST MONTH
     ====================================================== -->
 
     <section class="card">
@@ -596,7 +460,7 @@ RETURN
         <div>
 
           <div class="title">
-            6. ScorePct — vs Last Month
+            4. ScorePct — vs Last Month
           </div>
 
           <div class="subtitle">
@@ -605,7 +469,7 @@ RETURN
 
         </div>
 
-        <button onclick="copyCode('code6', this)">
+        <button onclick="copyCode('code4', this)">
           Copy
         </button>
 
@@ -614,7 +478,7 @@ RETURN
 
       <div class="code-wrap">
 
-        <pre id="code6">ScorePct LM =
+        <pre id="code4">ScorePct LM =
 
 VAR _CM =
     AVERAGE('powerbi_overall_vm_score'[ScorePct])
@@ -696,6 +560,8 @@ RETURN
 
         })
         .catch(() => {
+
+          /* Fallback for browsers where clipboard API is unavailable */
 
           const textarea = document.createElement("textarea");
 
