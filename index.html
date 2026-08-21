@@ -513,7 +513,15 @@ RETURN
 
     </section>
 
-
+<p>ScorePct Previous Month =
+CALCULATE(
+    [ScorePct],
+    DATEADD(
+        'powerbi_overall_vm_score'[ReportMonth],
+        -1,
+        MONTH
+    )
+)</p>
     <!-- =========================
          FOOTER
     ========================== -->
