@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Power BI KPI Measures</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Inter, Segoe UI, Arial, sans-serif;
+    background: #f4f7fb;
+    color: #172033;
+    line-height: 1.5;
+  }
+  .header {
+    background: linear-gradient(135deg, #172554, #2563eb);
+    color: white;
+    padding: 38px 24px;
+  }
+  .header-inner { max-width: 1100px; margin: auto; }
+  .header h1 { margin: 0 0 8px; font-size: 30px; }
+  .header p { margin: 0; opacity: .88; }
+  .container { max-width: 1100px; margin: 30px auto; padding: 0 20px 50px; }
+  .card {
+    background: white;
+    border: 1px solid #e4e9f2;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    box-shadow: 0 8px 24px rgba(23, 32, 51, .06);
+  }
+  .card-head {
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    border-bottom: 1px solid #edf0f5;
+  }
+  .title { font-size: 18px; font-weight: 700; }
+  .subtitle { color: #64748b; font-size: 13px; margin-top: 3px; }
+  button {
+    border: 0;
+    border-radius: 9px;
+    padding: 9px 14px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  button:hover { background: #1d4ed8; }
+  .code-wrap { position: relative; background: #0f172a; }
+  pre {
+    margin: 0;
+    padding: 22px;
+    overflow-x: auto;
+    color: #e2e8f0;
+    font: 14px/1.65 Consolas, "Courier New", monospace;
+    user-select: text;
+    white-space: pre;
+  }
+  .tip {
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    padding: 14px 16px;
+    margin-bottom: 24px;
+    border-radius: 8px;
+    color: #1e3a8a;
+  }
+  .footer { text-align: center; color: #64748b; font-size: 13px; margin-top: 30px; }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <h1>Power BI KPI Measures</h1>
+    <p>Sales comparison measures — Last Year, Last Month & Conditional Formatting</p>
+  </div>
+</header>
+
+<main class="container">
+
+  <div class="tip">
+    <strong>Copy tip:</strong> Drag-select any DAX code below and press
+    <strong>Ctrl + C</strong>, or use the <strong>Copy</strong> button.
+  </div>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <div class="title">1. KPI Card — vs Last Year</div>
+        <div class="subtitle">Calculates Sales percentage change compared with the previous year.</div>
+      </div>
+      <button onclick="copyCode('code1', this)">Copy</button>
+    </div>
+    <div class="code-wrap">
+      <pre id="code1">KPI Card =
+
+VAR _CM = [Sales]
+
+VAR _PM =
+    CALCULATE(
+        [Sales],
+        DATEADD('Date Table'[Date], -1, YEAR)
+    )
+
+VAR _perc =
+    DIVIDE(_CM - _PM, _PM)
+
+VAR _format =
+    SWITCH(
+        TRUE(),
+        _perc > 0, UNICHAR(11165) & " " & FORMAT(_perc, "0.0%"),
+        _perc < 0, UNICHAR(11167) & " " & FORMAT(_perc * -1, "0.0%"),
+        FORMAT(_perc, "0.0%")
+    )
+
+RETURN
+    _format</pre>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <div class="title">2. KPI Card — vs Last Month</div>
+        <div class="subtitle">Calculates Sales percentage change compared with the previous month.</div>
+      </div>
+      <button onclick="copyCode('code2', this)">Copy</button>
+    </div>
+    <div class="code-wrap">
+      <pre id="code2">KPI Card =
+
+VAR _CM = [Sales]
+
+VAR _PM =
+    CALCULATE(
+        [Sales],
+        DATEADD('Date Table'[Date], -1, MONTH)
+    )
+
+VAR _perc =
+    DIVIDE(_CM - _PM, _PM)
+
+VAR _format =
+    SWITCH(
+        TRUE(),
+        _perc > 0, UNICHAR(11165) & " " & FORMAT(_perc, "0.0%"),
+        _perc < 0, UNICHAR(11167) & " " & FORMAT(_perc * -1, "0.0%"),
+        FORMAT(_perc, "0.0%")
+    )
+
+RETURN
+    _format</pre>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <div class="title">3. KPI Card Color — Last Month</div>
+        <div class="subtitle">Returns Green, Red or Grey for conditional formatting.</div>
+      </div>
+      <button onclick="copyCode('code3', this)">Copy</button>
+    </div>
+    <div class="code-wrap">
+      <pre id="code3">KPI Card Color Month =
+
+VAR _CM = [Sales]
+
+VAR _PM =
+    CALCULATE(
+        [Sales],
+        DATEADD('Date Table'[Date], -1, MONTH)
+    )
+
+VAR _perc =
+    DIVIDE(_CM - _PM, _PM)
+
+VAR _format =
+    SWITCH(
+        TRUE(),
+        _perc > 0, "Green",
+        _perc < 0, "Red",
+        "Grey"
+    )
+
+RETURN
+    _format</pre>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-head">
+      <div>
+        <div class="title">4. KPI Card Color — Last Year</div>
+        <div class="subtitle">Returns Green, Red or Grey for year-over-year conditional formatting.</div>
+      </div>
+      <button onclick="copyCode('code4', this)">Copy</button>
+    </div>
+    <div class="code-wrap">
+      <pre id="code4">KPI Card Color Year =
+
+VAR _CM = [Sales]
+
+VAR _PM =
+    CALCULATE(
+        [Sales],
+        DATEADD('Date Table'[Date], -1, YEAR)
+    )
+
+VAR _perc =
+    DIVIDE(_CM - _PM, _PM)
+
+VAR _format =
+    SWITCH(
+        TRUE(),
+        _perc > 0, "Green",
+        _perc < 0, "Red",
+        "Grey"
+    )
+
+RETURN
+    _format</pre>
+    </div>
+  </section>
+
+  <div class="footer">
+    Power BI KPI Measures • Ready for copy-paste into Power BI Desktop
+  </div>
+</main>
+
+<script>
+function copyCode(id, button) {
+  const text = document.getElementById(id).innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = button.innerText;
+    button.innerText = "Copied!";
+    setTimeout(() => button.innerText = original, 1400);
+  });
+}
+</script>
+
+</body>
+</html>
