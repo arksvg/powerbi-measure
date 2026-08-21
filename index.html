@@ -513,69 +513,25 @@ RETURN
 
     </section>
 
-<p>ScorePct Previous Month =
-CALCULATE(
-    [ScorePct],
-    DATEADD(
-        'powerbi_overall_vm_score'[ReportMonth],
-        -1,
-        MONTH
-    )
-)</p>
-
-    <p>ScorePct Same Month Last Year =
-CALCULATE(
-    [ScorePct],
-    DATEADD(
-        'powerbi_overall_vm_score'[ReportMonth],
-        -1,
-        YEAR
-    )
-)</p>
-
-    <p>Month Number =
-SWITCH(
-    'YourTable'[ReportMonthLabel],
-    "January", 1,
-    "February", 2,
-    "March", 3,
-    "April", 4,
-    "May", 5,
-    "June", 6,
-    "July", 7,
-    "August", 8,
-    "September", 9,
-    "October", 10,
-    "November", 11,
-    "December", 12
-)</p>
-
-    <p>Month Number =
-MONTH(
-    SELECTEDVALUE(
-        'powerbi_domain_externally_facing'[ReportMonthLabel]
-    )
-)</p>
-
-    <p>Month Number =
-SWITCH(
-    'powerbi_domain_externally_facing'[ReportMonthLabel],
-    "January", 1,
-    "February", 2,
-    "March", 3,
-    "April", 4,
-    "May", 5,
-    "June", 6,
-    "July", 7,
-    "August", 8,
-    "September", 9,
-    "October", 10,
-    "November", 11,
-    "December", 12
-)</p>
 
     <p>Month Number =
 MONTH('powerbi_domain_externally_facing'[ReportMonth])</p>
+
+  </hr>
+
+    <p>Grade Display =
+VAR _Score = AVERAGE('YourTable'[ScorePct])
+VAR _Grade =
+    SWITCH(
+        TRUE(),
+        _Score >= 0.90, "A",
+        _Score >= 0.80, "B",
+        _Score >= 0.70, "C",
+        _Score >= 0.60, "D",
+        "F"
+    )
+RETURN
+    _Grade & " " & FORMAT(_Score, "0%")</p>
     <!-- =========================
          FOOTER
     ========================== -->
