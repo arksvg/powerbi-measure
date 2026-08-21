@@ -519,8 +519,10 @@ MONTH('powerbi_domain_externally_facing'[ReportMonth])</p>
 
   </hr>
 
-    <p>Grade Display =
-VAR _Score = AVERAGE('YourTable'[ScorePct])
+    <p>Score Grade Badge =
+VAR _Score =
+    AVERAGE('YourTable'[ScorePct])
+
 VAR _Grade =
     SWITCH(
         TRUE(),
@@ -530,8 +532,59 @@ VAR _Grade =
         _Score >= 0.60, "D",
         "F"
     )
+
+VAR _Color =
+    SWITCH(
+        TRUE(),
+        _Score >= 0.90, "#22C55E",
+        _Score >= 0.80, "#FBBF24",
+        _Score >= 0.70, "#F97316",
+        _Score >= 0.60, "#EF4444",
+        "#DC2626"
+    )
+
+VAR _Percentage =
+    FORMAT(_Score, "0%")
+
 RETURN
-    _Grade & " " & FORMAT(_Score, "0%")</p>
+"
+<svg width='60' height='65' viewBox='0 0 60 65'
+     xmlns='http://www.w3.org/2000/svg'>
+
+    <!-- Hexagon -->
+    <polygon
+        points='30,2 52,15 52,42 30,55 8,42 8,15'
+        fill='none'
+        stroke='" & _Color & "'
+        stroke-width='2.2'
+    />
+
+    <!-- Grade -->
+    <text
+        x='30'
+        y='27'
+        text-anchor='middle'
+        font-family='Arial'
+        font-size='19'
+        font-weight='600'
+        fill='" & _Color & "'>
+        " & _Grade & "
+    </text>
+
+    <!-- Percentage -->
+    <text
+        x='30'
+        y='42'
+        text-anchor='middle'
+        font-family='Arial'
+        font-size='9'
+        font-weight='600'
+        fill='" & _Color & "'>
+        " & _Percentage & "
+    </text>
+
+</svg>
+"</p>
     <!-- =========================
          FOOTER
     ========================== -->
