@@ -19,7 +19,10 @@
       line-height: 1.5;
     }
 
-    /* Header */
+    /* =========================
+       HEADER
+    ========================== */
+
     .header {
       background: linear-gradient(135deg, #172554, #2563eb);
       color: white;
@@ -43,14 +46,20 @@
       font-size: 15px;
     }
 
-    /* Main */
+    /* =========================
+       MAIN CONTAINER
+    ========================== */
+
     .container {
       max-width: 1100px;
       margin: 30px auto;
       padding: 0 20px 50px;
     }
 
-    /* Tip */
+    /* =========================
+       COPY TIP
+    ========================== */
+
     .tip {
       background: #eff6ff;
       border-left: 4px solid #2563eb;
@@ -61,7 +70,10 @@
       font-size: 14px;
     }
 
-    /* Card */
+    /* =========================
+       CARD
+    ========================== */
+
     .card {
       background: white;
       border: 1px solid #e4e9f2;
@@ -77,7 +89,10 @@
       box-shadow: 0 12px 30px rgba(23, 32, 51, 0.1);
     }
 
-    /* Card Header */
+    /* =========================
+       CARD HEADER
+    ========================== */
+
     .card-head {
       padding: 18px 22px;
       display: flex;
@@ -99,7 +114,10 @@
       margin-top: 3px;
     }
 
-    /* Copy Button */
+    /* =========================
+       COPY BUTTON
+    ========================== */
+
     button {
       border: none;
       border-radius: 9px;
@@ -121,7 +139,10 @@
       background: #16a34a;
     }
 
-    /* Code */
+    /* =========================
+       CODE AREA
+    ========================== */
+
     .code-wrap {
       position: relative;
       background: #0f172a;
@@ -137,7 +158,10 @@
       white-space: pre;
     }
 
-    /* Footer */
+    /* =========================
+       FOOTER
+    ========================== */
+
     .footer {
       text-align: center;
       color: #64748b;
@@ -145,8 +169,12 @@
       margin-top: 35px;
     }
 
-    /* Mobile */
+    /* =========================
+       MOBILE
+    ========================== */
+
     @media (max-width: 700px) {
+
       .header {
         padding: 30px 18px;
       }
@@ -176,45 +204,60 @@
         font-size: 12px;
         padding: 18px;
       }
+
     }
   </style>
 </head>
 
 <body>
 
-  <!-- Header -->
+  <!-- =========================
+       HEADER
+  ========================== -->
+
   <header class="header">
+
     <div class="header-inner">
+
       <h1>Power BI KPI Measures</h1>
 
       <p>
-        Sales & ScorePct comparison measures — Last Year, Last Month
-        & Conditional Formatting
+        Sales &amp; ScorePct comparison measures — Last Year, Last Month
+        &amp; Conditional Formatting
       </p>
+
     </div>
+
   </header>
 
 
   <main class="container">
 
-    <!-- Copy Tip -->
+    <!-- =========================
+         COPY TIP
+    ========================== -->
+
     <div class="tip">
+
       <strong>Copy tip:</strong>
+
       Drag-select any DAX code below and press
       <strong>Ctrl + C</strong>,
       or click the <strong>Copy</strong> button.
+
     </div>
 
 
-    <!-- ====================================================== -->
-    <!-- 1. KPI CARD - LAST YEAR -->
-    <!-- ====================================================== -->
+    <!-- =====================================================
+         1. KPI CARD - LAST YEAR
+    ====================================================== -->
 
     <section class="card">
 
       <div class="card-head">
 
         <div>
+
           <div class="title">
             1. KPI Card — vs Last Year
           </div>
@@ -222,6 +265,7 @@
           <div class="subtitle">
             Calculates Sales percentage change compared with the previous year.
           </div>
+
         </div>
 
         <button onclick="copyCode('code1', this)">
@@ -229,6 +273,7 @@
         </button>
 
       </div>
+
 
       <div class="code-wrap">
 
@@ -271,15 +316,16 @@ RETURN
     </section>
 
 
-    <!-- ====================================================== -->
-    <!-- 2. KPI CARD - LAST MONTH -->
-    <!-- ====================================================== -->
+    <!-- =====================================================
+         2. KPI CARD - LAST MONTH
+    ====================================================== -->
 
     <section class="card">
 
       <div class="card-head">
 
         <div>
+
           <div class="title">
             2. KPI Card — vs Last Month
           </div>
@@ -287,6 +333,7 @@ RETURN
           <div class="subtitle">
             Calculates Sales percentage change compared with the previous month.
           </div>
+
         </div>
 
         <button onclick="copyCode('code2', this)">
@@ -294,6 +341,7 @@ RETURN
         </button>
 
       </div>
+
 
       <div class="code-wrap">
 
@@ -336,15 +384,16 @@ RETURN
     </section>
 
 
-    <!-- ====================================================== -->
-    <!-- 3. KPI CARD COLOR - LAST MONTH -->
-    <!-- ====================================================== -->
+    <!-- =====================================================
+         3. KPI CARD COLOR - LAST MONTH
+    ====================================================== -->
 
     <section class="card">
 
       <div class="card-head">
 
         <div>
+
           <div class="title">
             3. KPI Card Color — Last Month
           </div>
@@ -352,6 +401,7 @@ RETURN
           <div class="subtitle">
             Returns Green, Red or Grey for conditional formatting.
           </div>
+
         </div>
 
         <button onclick="copyCode('code3', this)">
@@ -359,6 +409,7 @@ RETURN
         </button>
 
       </div>
+
 
       <div class="code-wrap">
 
@@ -401,15 +452,16 @@ RETURN
     </section>
 
 
-    <!-- ====================================================== -->
-    <!-- 4. KPI CARD COLOR - LAST YEAR -->
-    <!-- ====================================================== -->
+    <!-- =====================================================
+         4. KPI CARD COLOR - LAST YEAR
+    ====================================================== -->
 
     <section class="card">
 
       <div class="card-head">
 
         <div>
+
           <div class="title">
             4. KPI Card Color — Last Year
           </div>
@@ -417,6 +469,7 @@ RETURN
           <div class="subtitle">
             Returns Green, Red or Grey for year-over-year conditional formatting.
           </div>
+
         </div>
 
         <button onclick="copyCode('code4', this)">
@@ -424,6 +477,7 @@ RETURN
         </button>
 
       </div>
+
 
       <div class="code-wrap">
 
@@ -466,15 +520,16 @@ RETURN
     </section>
 
 
-    <!-- ====================================================== -->
-    <!-- 5. SCOREPCT - LAST YEAR -->
-    <!-- ====================================================== -->
+    <!-- =====================================================
+         5. SCOREPCT - LAST YEAR
+    ====================================================== -->
 
     <section class="card">
 
       <div class="card-head">
 
         <div>
+
           <div class="title">
             5. ScorePct — vs Last Year
           </div>
@@ -482,6 +537,7 @@ RETURN
           <div class="subtitle">
             Calculates ScorePct percentage change compared with the previous year.
           </div>
+
         </div>
 
         <button onclick="copyCode('code5', this)">
@@ -489,6 +545,7 @@ RETURN
         </button>
 
       </div>
+
 
       <div class="code-wrap">
 
@@ -528,20 +585,89 @@ RETURN
     </section>
 
 
-    <!-- Footer -->
+    <!-- =====================================================
+         6. SCOREPCT - LAST MONTH
+    ====================================================== -->
+
+    <section class="card">
+
+      <div class="card-head">
+
+        <div>
+
+          <div class="title">
+            6. ScorePct — vs Last Month
+          </div>
+
+          <div class="subtitle">
+            Calculates ScorePct percentage change compared with the previous month.
+          </div>
+
+        </div>
+
+        <button onclick="copyCode('code6', this)">
+          Copy
+        </button>
+
+      </div>
+
+
+      <div class="code-wrap">
+
+        <pre id="code6">ScorePct LM =
+
+VAR _CM =
+    AVERAGE('powerbi_overall_vm_score'[ScorePct])
+
+VAR _LM =
+    CALCULATE(
+        AVERAGE('powerbi_overall_vm_score'[ScorePct]),
+        DATEADD(
+            'powerbi_overall_vm_score'[ReportMonth],
+            -1,
+            MONTH
+        )
+    )
+
+VAR _Change =
+    DIVIDE(
+        _CM - _LM,
+        _LM
+    )
+
+RETURN
+    SWITCH(
+        TRUE(),
+        _Change &gt; 0,
+            UNICHAR(11165) &amp; " " &amp; FORMAT(_Change, "0.0%"),
+        _Change &lt; 0,
+            UNICHAR(11167) &amp; " " &amp; FORMAT(ABS(_Change), "0.0%"),
+        "0.0%"
+    )</pre>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <div class="footer">
+
       Power BI KPI Measures
       •
       Ready for copy-paste into Power BI Desktop
+
     </div>
 
   </main>
 
 
-  <!-- ====================================================== -->
-  <!-- COPY SCRIPT -->
-  <!-- ====================================================== -->
+  <!-- =========================
+       COPY SCRIPT
+  ========================== -->
 
   <script>
 
@@ -570,8 +696,6 @@ RETURN
 
         })
         .catch(() => {
-
-          /* Fallback for browsers where clipboard API is unavailable */
 
           const textarea = document.createElement("textarea");
 
